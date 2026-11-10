@@ -74,9 +74,9 @@ struct CreateAddressSheet: View {
             }
             .onKmpEvent(vm.eventsForSwift) { event in
                 // The quick form skips the map and details steps.
-                if event is CreateAddressEventGoToConfirm {
+                if event is CreateAddressEvent.GoToConfirm {
                     vm.onConfirm()
-                } else if let finished = event as? CreateAddressEventFinished {
+                } else if let finished = event as? CreateAddressEvent.Finished {
                     onFinished(finished.message)
                 }
             }

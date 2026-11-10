@@ -86,7 +86,7 @@ struct LoginScreen: View {
                 }
             }
             .onKmpEvent(vm.eventsForSwift) { event in
-                if let sent = event as? LoginEventOtpSent { onOtpSent(sent.phoneNumber) }
+                if let sent = event as? LoginEvent.OtpSent { onOtpSent(sent.phoneNumber) }
             }
         }
     }
@@ -135,7 +135,7 @@ struct OtpScreen: View {
                 }
             }
             .onKmpEvent(vm.eventsForSwift) { event in
-                if let verified = event as? OtpEventVerified { onVerified(verified.isNewUser) }
+                if let verified = event as? OtpEvent.Verified { onVerified(verified.isNewUser) }
             }
         }
     }
@@ -176,7 +176,7 @@ struct FullNameScreen: View {
                 }
             }
             .onKmpEvent(vm.eventsForSwift) { event in
-                if let submitted = event as? FullNameEventSubmitted { onSubmitted(submitted.firstName) }
+                if let submitted = event as? FullNameEvent.Submitted { onSubmitted(submitted.firstName) }
             }
         }
     }
