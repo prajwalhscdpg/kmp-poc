@@ -1,0 +1,4 @@
+<resources>
+    <!-- Launcher label only. Every in-app string comes from :shared (core/strings). -->
+    <string name="app_name">Dhruva KMP</string>
+</resources>
