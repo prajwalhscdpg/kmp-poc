@@ -96,12 +96,12 @@ fun IntroScreen(onContinue: () -> Unit) {
         ) {
             Spacer(Modifier.weight(1f))
             BrandMark()
-            Text(text(StringKey.IntroHeadline), style = MaterialTheme.typography.headlineLarge, color = DhruvaColors.OnSurface)
-            Text(text(StringKey.IntroSupportingText), style = MaterialTheme.typography.bodyLarge, color = DhruvaColors.Caption)
+            Text(text(StringKey.INTRO_HEADLINE), style = MaterialTheme.typography.headlineLarge, color = DhruvaColors.OnSurface)
+            Text(text(StringKey.INTRO_SUPPORTING_TEXT), style = MaterialTheme.typography.bodyLarge, color = DhruvaColors.Caption)
             Spacer(Modifier.weight(1f))
-            PrimaryButton(text(StringKey.IntroGetStarted), onClick = onContinue)
+            PrimaryButton(text(StringKey.INTRO_GET_STARTED), onClick = onContinue)
             TextButton(onClick = onContinue, modifier = Modifier.fillMaxWidth()) {
-                Text(text(StringKey.IntroReturningUser), color = DhruvaColors.Primary)
+                Text(text(StringKey.INTRO_RETURNING_USER), color = DhruvaColors.Primary)
             }
         }
     }
@@ -128,14 +128,14 @@ fun LoginScreen(graph: AppGraph, onOtpSent: (String) -> Unit) {
         ) {
             Spacer(Modifier.height(48.dp))
             BrandMark()
-            Text(text(StringKey.LoginTagline), style = MaterialTheme.typography.titleMedium, color = DhruvaColors.Caption)
+            Text(text(StringKey.LOGIN_TAGLINE), style = MaterialTheme.typography.titleMedium, color = DhruvaColors.Caption)
             AuthCard {
-                Text(text(StringKey.LoginTitle), style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.SemiBold)
+                Text(text(StringKey.LOGIN_TITLE), style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.SemiBold)
                 OutlinedTextField(
                     value = state.phoneNumber,
                     onValueChange = viewModel::onPhoneNumberChange,
-                    prefix = { Text(text(StringKey.LoginCountryCode) + "  ") },
-                    placeholder = { Text(text(StringKey.LoginPhonePlaceholder)) },
+                    prefix = { Text(text(StringKey.LOGIN_COUNTRY_CODE) + "  ") },
+                    placeholder = { Text(text(StringKey.LOGIN_PHONE_PLACEHOLDER)) },
                     isError = state.error != null,
                     supportingText = state.error?.let { { Text(it.asString()) } },
                     singleLine = true,
@@ -144,7 +144,7 @@ fun LoginScreen(graph: AppGraph, onOtpSent: (String) -> Unit) {
                     modifier = Modifier.fillMaxWidth(),
                 )
                 PrimaryButton(
-                    text(StringKey.ContinueAction),
+                    text(StringKey.CONTINUE_ACTION),
                     onClick = viewModel::onContinue,
                     enabled = state.isContinueEnabled,
                     isLoading = state.isSendingOtp,
@@ -178,9 +178,9 @@ fun OtpScreen(
             Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(24.dp),
             verticalArrangement = Arrangement.spacedBy(24.dp),
         ) {
-            TextButton(onClick = onBack) { Text("‹ " + text(StringKey.Back), color = DhruvaColors.Primary) }
+            TextButton(onClick = onBack) { Text("‹ " + text(StringKey.BACK), color = DhruvaColors.Primary) }
             AuthCard {
-                Text(text(StringKey.OtpTitle), style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.SemiBold)
+                Text(text(StringKey.OTP_TITLE), style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.SemiBold)
                 Text(state.codeSentText.asString(), style = MaterialTheme.typography.bodyMedium, color = DhruvaColors.Caption)
                 OutlinedTextField(
                     value = state.otp,
@@ -194,13 +194,13 @@ fun OtpScreen(
                     modifier = Modifier.fillMaxWidth(),
                 )
                 Row(verticalAlignment = Alignment.CenterVertically) {
-                    Text(text(StringKey.OtpNotReceived), style = MaterialTheme.typography.bodyMedium)
+                    Text(text(StringKey.OTP_NOT_RECEIVED), style = MaterialTheme.typography.bodyMedium)
                     TextButton(onClick = viewModel::onResend, enabled = state.canResend) {
                         Text(state.resendText.asString())
                     }
                 }
                 PrimaryButton(
-                    text(StringKey.ContinueAction),
+                    text(StringKey.CONTINUE_ACTION),
                     onClick = viewModel::onVerify,
                     enabled = state.isVerifyEnabled,
                     isLoading = state.isVerifying,
@@ -229,13 +229,13 @@ fun FullNameScreen(graph: AppGraph, onSubmitted: (firstName: String) -> Unit) {
             verticalArrangement = Arrangement.spacedBy(24.dp),
         ) {
             Spacer(Modifier.height(48.dp))
-            Text(text(StringKey.FullNameWelcome), style = MaterialTheme.typography.titleMedium, color = DhruvaColors.Caption)
+            Text(text(StringKey.FULL_NAME_WELCOME), style = MaterialTheme.typography.titleMedium, color = DhruvaColors.Caption)
             AuthCard {
-                Text(text(StringKey.FullNameTitle), style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.SemiBold)
+                Text(text(StringKey.FULL_NAME_TITLE), style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.SemiBold)
                 OutlinedTextField(
                     value = state.fullName,
                     onValueChange = viewModel::onFullNameChange,
-                    placeholder = { Text(text(StringKey.FullNamePlaceholder)) },
+                    placeholder = { Text(text(StringKey.FULL_NAME_PLACEHOLDER)) },
                     isError = state.error != null,
                     supportingText = state.error?.let { { Text(it.asString()) } },
                     singleLine = true,
@@ -247,7 +247,7 @@ fun FullNameScreen(graph: AppGraph, onSubmitted: (firstName: String) -> Unit) {
                     modifier = Modifier.fillMaxWidth(),
                 )
                 PrimaryButton(
-                    text(StringKey.ContinueAction),
+                    text(StringKey.CONTINUE_ACTION),
                     onClick = viewModel::onContinue,
                     enabled = state.isContinueEnabled,
                     isLoading = state.isSaving,
@@ -265,12 +265,12 @@ fun WelcomeScreen(firstName: String, onFinished: () -> Unit) {
             verticalArrangement = Arrangement.spacedBy(16.dp),
         ) {
             Spacer(Modifier.weight(1f))
-            Text(text(StringKey.WelcomeUserGreeting, firstName), style = MaterialTheme.typography.headlineMedium, color = DhruvaColors.Primary)
-            Text(text(StringKey.WelcomeUserCreateAddress), style = MaterialTheme.typography.headlineSmall, color = DhruvaColors.OnSurface)
+            Text(text(StringKey.WELCOME_USER_GREETING, firstName), style = MaterialTheme.typography.headlineMedium, color = DhruvaColors.Primary)
+            Text(text(StringKey.WELCOME_USER_CREATE_ADDRESS), style = MaterialTheme.typography.headlineSmall, color = DhruvaColors.OnSurface)
             Spacer(Modifier.weight(1f))
             // Both go to the dashboard for now (same as Dhruva iOS) until Create DA can start from here.
-            PrimaryButton(text(StringKey.WelcomeUserGetStarted), onClick = onFinished)
-            SecondaryButton(text(StringKey.WelcomeUserSkip), onClick = onFinished)
+            PrimaryButton(text(StringKey.WELCOME_USER_GET_STARTED), onClick = onFinished)
+            SecondaryButton(text(StringKey.WELCOME_USER_SKIP), onClick = onFinished)
         }
     }
 }

@@ -74,12 +74,12 @@ fun MyAddressesScreen(graph: AppGraph) {
                 onClick = { showCreate = true },
                 containerColor = DhruvaColors.Primary,
                 contentColor = Color.White,
-            ) { Text("+  " + text(StringKey.MyDaCreate)) }
+            ) { Text("+  " + text(StringKey.MY_DA_CREATE)) }
         },
     ) { padding ->
         Column(Modifier.fillMaxSize().padding(padding)) {
             Text(
-                text(StringKey.MyDaTitle),
+                text(StringKey.MY_DA_TITLE),
                 style = MaterialTheme.typography.headlineSmall,
                 fontWeight = FontWeight.SemiBold,
                 modifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 16.dp),
@@ -87,7 +87,7 @@ fun MyAddressesScreen(graph: AppGraph) {
             OutlinedTextField(
                 value = state.query,
                 onValueChange = viewModel::onQueryChange,
-                placeholder = { Text(text(StringKey.MyDaSearchPlaceholder)) },
+                placeholder = { Text(text(StringKey.MY_DA_SEARCH_PLACEHOLDER)) },
                 singleLine = true,
                 shape = RoundedCornerShape(28.dp),
                 modifier = Modifier.fillMaxWidth().padding(16.dp),
@@ -97,13 +97,13 @@ fun MyAddressesScreen(graph: AppGraph) {
                     Modifier.fillMaxWidth().padding(horizontal = 16.dp),
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
-                    Text(text(StringKey.DevSimulateOffline), style = MaterialTheme.typography.bodySmall, modifier = Modifier.weight(1f))
+                    Text(text(StringKey.DEV_SIMULATE_OFFLINE), style = MaterialTheme.typography.bodySmall, modifier = Modifier.weight(1f))
                     Switch(checked = state.isSimulatingOffline, onCheckedChange = viewModel::onSimulateOfflineChange)
                 }
             }
             if (state.isOffline) {
                 Text(
-                    text(StringKey.MyDaOfflineBanner),
+                    text(StringKey.MY_DA_OFFLINE_BANNER),
                     color = DhruvaColors.Warning,
                     style = MaterialTheme.typography.bodySmall,
                     modifier = Modifier
@@ -125,11 +125,11 @@ fun MyAddressesScreen(graph: AppGraph) {
                     state.isLoading -> CenteredBox { CircularProgressIndicator(color = DhruvaColors.Primary) }
                     error != null -> CenteredBox {
                         Text(error.asString(), textAlign = TextAlign.Center)
-                        PrimaryButton(text(StringKey.Retry), onClick = viewModel::onRetry)
+                        PrimaryButton(text(StringKey.RETRY), onClick = viewModel::onRetry)
                     }
                     state.isEmpty -> CenteredBox {
-                        Text(text(StringKey.MyDaEmptyTitle), style = MaterialTheme.typography.titleMedium, textAlign = TextAlign.Center)
-                        Text(text(StringKey.MyDaEmptyDescription), color = DhruvaColors.Caption, textAlign = TextAlign.Center)
+                        Text(text(StringKey.MY_DA_EMPTY_TITLE), style = MaterialTheme.typography.titleMedium, textAlign = TextAlign.Center)
+                        Text(text(StringKey.MY_DA_EMPTY_DESCRIPTION), color = DhruvaColors.Caption, textAlign = TextAlign.Center)
                     }
                     noResults != null -> CenteredBox { Text(noResults.asString(), color = DhruvaColors.Caption) }
                     else -> LazyColumn(
@@ -175,13 +175,13 @@ private fun AddressRow(address: DigitalAddress) {
                 Text(text(address.type.label), style = MaterialTheme.typography.labelSmall, color = DhruvaColors.Caption)
                 if (address.isPendingSync) {
                     Text(
-                        "⟳ " + text(StringKey.MyDaPendingSync),
+                        "⟳ " + text(StringKey.MY_DA_PENDING_SYNC),
                         style = MaterialTheme.typography.labelSmall,
                         color = DhruvaColors.Warning,
                     )
                 }
             }
-            Text(text(StringKey.MyDaView), color = DhruvaColors.Primary)
+            Text(text(StringKey.MY_DA_VIEW), color = DhruvaColors.Primary)
         }
     }
 }

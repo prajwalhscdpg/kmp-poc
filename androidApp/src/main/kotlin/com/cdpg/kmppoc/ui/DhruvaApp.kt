@@ -48,7 +48,7 @@ fun DhruvaApp(graph: AppGraph) {
     // Session ended (sign out, or the server refused the refresh token): back to Login.
     LaunchedEffect(sessionState) {
         val route = navController.currentDestination?.route
-        if (sessionState == SessionState.SignedOut && route == Routes.MAIN) {
+        if (sessionState == SessionState.SIGNED_OUT && route == Routes.MAIN) {
             navController.navigateClearingStack(Routes.LOGIN)
         }
     }

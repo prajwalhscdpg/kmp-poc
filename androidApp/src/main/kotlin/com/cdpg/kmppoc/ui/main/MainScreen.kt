@@ -34,10 +34,10 @@ import com.cdpg.kmppoc.ui.theme.DhruvaColors
 import kotlinx.coroutines.launch
 
 private enum class Tab(val label: StringKey, val glyph: String) {
-    Home(StringKey.TabHome, "⌂"),
-    MyAddresses(StringKey.TabMyAddresses, "◎"),
-    Sharing(StringKey.TabSharing, "⇄"),
-    Profile(StringKey.TabProfile, "☺"),
+    Home(StringKey.TAB_HOME, "⌂"),
+    MyAddresses(StringKey.TAB_MY_ADDRESSES, "◎"),
+    Sharing(StringKey.TAB_SHARING, "⇄"),
+    Profile(StringKey.TAB_PROFILE, "☺"),
 }
 
 /** The tab shell (Home, My DAs, Sharing, Profile) from both apps. */
@@ -78,7 +78,7 @@ private fun ComingSoon(title: String) {
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Text(title, style = MaterialTheme.typography.headlineSmall)
-        Text(text(StringKey.PlaceholderComingSoon), color = DhruvaColors.Caption, textAlign = TextAlign.Center)
+        Text(text(StringKey.PLACEHOLDER_COMING_SOON), color = DhruvaColors.Caption, textAlign = TextAlign.Center)
     }
 }
 
@@ -89,8 +89,8 @@ private fun ProfileTab(graph: AppGraph) {
     val scope = rememberCoroutineScope()
 
     Column(Modifier.fillMaxSize().padding(24.dp), verticalArrangement = Arrangement.spacedBy(16.dp)) {
-        Text(text(StringKey.TabProfile), style = MaterialTheme.typography.headlineMedium)
-        Text(text(StringKey.ProfileAppLanguage), style = MaterialTheme.typography.titleMedium)
+        Text(text(StringKey.TAB_PROFILE), style = MaterialTheme.typography.headlineMedium)
+        Text(text(StringKey.PROFILE_APP_LANGUAGE), style = MaterialTheme.typography.titleMedium)
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             listOf(AppLanguage.English to "English", AppLanguage.Hindi to "हिन्दी").forEach { (option, name) ->
                 FilterChip(
@@ -101,7 +101,7 @@ private fun ProfileTab(graph: AppGraph) {
             }
         }
         SecondaryButton(
-            text(StringKey.SignOut),
+            text(StringKey.SIGN_OUT),
             onClick = { scope.launch { graph.session.signOut() } },
             modifier = Modifier.fillMaxWidth(),
         )

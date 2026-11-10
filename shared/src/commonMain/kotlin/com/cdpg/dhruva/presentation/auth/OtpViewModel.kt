@@ -36,12 +36,12 @@ data class OtpUiState(
     val canResend: Boolean get() = resendSecondsLeft == 0 && !isVerifying
 
     /** "We have sent a verification code to your phone number ending with 5577." */
-    val codeSentText: UiText get() = UiText.Res(StringKey.OtpCodeSent, listOf(phoneNumber.takeLast(4)))
+    val codeSentText: UiText get() = UiText.Res(StringKey.OTP_CODE_SENT, listOf(phoneNumber.takeLast(4)))
 
     /** "Resend in 12s" while counting down, "Resend" once allowed. */
     val resendText: UiText
-        get() = if (resendSecondsLeft > 0) UiText.Res(StringKey.OtpResendIn, listOf(resendSecondsLeft))
-        else UiText.Res(StringKey.OtpResend)
+        get() = if (resendSecondsLeft > 0) UiText.Res(StringKey.OTP_RESEND_IN, listOf(resendSecondsLeft))
+        else UiText.Res(StringKey.OTP_RESEND)
 }
 
 sealed class OtpEvent {
@@ -90,7 +90,7 @@ class OtpViewModel(
                         _events.send(OtpEvent.Verified(verification.isNewUser))
                     }
                     OtpVerification.Incorrect -> _state.update {
-                        it.copy(isVerifying = false, error = UiText.Res(StringKey.OtpErrorIncorrect))
+                        it.copy(isVerifying = false, error = UiText.Res(StringKey.OTP_ERROR_INCORRECT))
                     }
                 }
                 is DanAiaResult.Error -> _state.update { it.copy(isVerifying = false, error = result.error.toUiText()) }

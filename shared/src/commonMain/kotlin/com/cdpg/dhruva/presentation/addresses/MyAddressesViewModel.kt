@@ -79,7 +79,7 @@ class MyAddressesViewModel(
             error = if (nothingCached && failure != null) failure.toUiText() else null,
             isEmpty = nothingCached && status.hasCompletedOnce && failure == null,
             noResults = if (!nothingCached && filtered.isEmpty() && query.isNotBlank()) {
-                UiText.Res(StringKey.MyDaNoSearchResults, listOf(query.trim()))
+                UiText.Res(StringKey.MY_DA_NO_SEARCH_RESULTS, listOf(query.trim()))
             } else {
                 null
             },

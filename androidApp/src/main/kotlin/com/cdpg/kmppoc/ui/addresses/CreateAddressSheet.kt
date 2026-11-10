@@ -64,16 +64,16 @@ fun CreateAddressSheet(graph: AppGraph, onDismiss: () -> Unit, onFinished: (UiTe
             Modifier.fillMaxWidth().padding(horizontal = 24.dp, vertical = 8.dp),
             verticalArrangement = Arrangement.spacedBy(12.dp),
         ) {
-            Text(text(StringKey.CreateDaHeadline), style = MaterialTheme.typography.titleLarge)
-            Text(text(StringKey.CreateDaPocNote), style = MaterialTheme.typography.bodySmall, color = DhruvaColors.Caption)
+            Text(text(StringKey.CREATE_DA_HEADLINE), style = MaterialTheme.typography.titleLarge)
+            Text(text(StringKey.CREATE_DA_POC_NOTE), style = MaterialTheme.typography.bodySmall, color = DhruvaColors.Caption)
 
             Text(
-                text(StringKey.CreateDaDigipinLabel) + ": " + state.digipinDisplay.asString(),
+                text(StringKey.CREATE_DA_DIGIPIN_LABEL) + ": " + state.digipinDisplay.asString(),
                 style = MaterialTheme.typography.titleSmall,
                 color = DhruvaColors.Primary,
             )
 
-            Text(text(StringKey.CreateDaTypeLabel), style = MaterialTheme.typography.labelLarge)
+            Text(text(StringKey.CREATE_DA_TYPE_LABEL), style = MaterialTheme.typography.labelLarge)
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 state.typeOptions.forEach { type ->
                     FilterChip(
@@ -87,7 +87,7 @@ fun CreateAddressSheet(graph: AppGraph, onDismiss: () -> Unit, onFinished: (UiTe
             OutlinedTextField(
                 value = state.nickname,
                 onValueChange = viewModel::onNicknameChange,
-                label = { Text(text(StringKey.CreateDaNicknameLabel)) },
+                label = { Text(text(StringKey.CREATE_DA_NICKNAME_LABEL)) },
                 isError = state.nicknameError != null,
                 supportingText = state.nicknameError?.let { { Text(it.asString()) } },
                 singleLine = true,
@@ -96,7 +96,7 @@ fun CreateAddressSheet(graph: AppGraph, onDismiss: () -> Unit, onFinished: (UiTe
             OutlinedTextField(
                 value = state.prefix,
                 onValueChange = viewModel::onPrefixChange,
-                label = { Text(text(StringKey.CreateDaPrefixLabel)) },
+                label = { Text(text(StringKey.CREATE_DA_PREFIX_LABEL)) },
                 suffix = { Text(state.suffix) },
                 isError = state.prefixError != null,
                 supportingText = state.prefixError?.let { { Text(it.asString()) } },
@@ -108,7 +108,7 @@ fun CreateAddressSheet(graph: AppGraph, onDismiss: () -> Unit, onFinished: (UiTe
             state.submitError?.let { Text(it.asString(), color = MaterialTheme.colorScheme.error) }
 
             PrimaryButton(
-                text(StringKey.CreateDaSave),
+                text(StringKey.CREATE_DA_SAVE),
                 onClick = viewModel::onNicknameProceed,
                 isLoading = state.isSubmitting,
                 modifier = Modifier.padding(bottom = 24.dp),

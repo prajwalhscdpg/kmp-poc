@@ -61,14 +61,14 @@ fun SecondaryButton(label: String, onClick: () -> Unit, modifier: Modifier = Mod
 fun InitiativeFooter(modifier: Modifier = Modifier) {
     Column(modifier, verticalArrangement = Arrangement.spacedBy(4.dp)) {
         Text(
-            text(StringKey.SplashInitiativeBy),
+            text(StringKey.SPLASH_INITIATIVE_BY),
             style = MaterialTheme.typography.labelMedium,
             color = DhruvaColors.Caption,
             textAlign = TextAlign.Center,
             modifier = Modifier.fillMaxWidth(),
         )
         Text(
-            text(StringKey.SplashMinistry),
+            text(StringKey.SPLASH_MINISTRY),
             style = MaterialTheme.typography.bodySmall,
             color = DhruvaColors.OnSurface,
             textAlign = TextAlign.Center,
@@ -80,7 +80,7 @@ fun InitiativeFooter(modifier: Modifier = Modifier) {
 @Composable
 fun BrandMark(modifier: Modifier = Modifier) {
     Text(
-        text(StringKey.AppName),
+        text(StringKey.APP_NAME),
         modifier = modifier,
         color = DhruvaColors.Primary,
         fontSize = 40.sp,

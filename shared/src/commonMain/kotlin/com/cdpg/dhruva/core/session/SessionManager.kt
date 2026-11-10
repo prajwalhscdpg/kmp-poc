@@ -11,10 +11,10 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 
-enum class SessionState { SignedOut, Authenticated }
+enum class SessionState { SIGNED_OUT, AUTHENTICATED }
 
 /**
- * Who is signed in. Both apps route on [state]: SignedOut → Login, Authenticated → Main.
+ * Who is signed in. Both apps route on [state]: SIGNED_OUT → Login, AUTHENTICATED → Main.
  *
  * Logout always completes: tokens and every cached record are wiped even if the server call
  * fails (Dhruva architecture §5).
@@ -24,7 +24,7 @@ class SessionManager(
     private val wipeLocalData: suspend () -> Unit,
 ) {
     private val _state = MutableStateFlow(
-        if (tokenStore.load() != null) SessionState.Authenticated else SessionState.SignedOut,
+        if (tokenStore.load() != null) SessionState.AUTHENTICATED else SessionState.SIGNED_OUT,
     )
     val state: StateFlow<SessionState> = _state.asStateFlow()
 
@@ -36,13 +36,13 @@ class SessionManager(
     val stateForSwift: CStateFlow<SessionState> get() = state.asCStateFlow()
     val sessionExpiredForSwift: CFlow<Unit> get() = sessionExpired.asCFlow()
 
-    val isSignedIn: Boolean get() = _state.value == SessionState.Authenticated
+    val isSignedIn: Boolean get() = _state.value == SessionState.AUTHENTICATED
 
     fun accessToken(): String? = tokenStore.load()?.accessToken
 
     fun startSession(tokens: AuthTokens) {
         tokenStore.save(tokens)
-        _state.value = SessionState.Authenticated
+        _state.value = SessionState.AUTHENTICATED
     }
 
     fun updateTokens(tokens: AuthTokens) {
@@ -54,12 +54,12 @@ class SessionManager(
     suspend fun signOut() {
         tokenStore.clear()
         wipeLocalData()
-        _state.value = SessionState.SignedOut
+        _state.value = SessionState.SIGNED_OUT
     }
 
     /** Called by the network layer when a refresh is refused. */
     suspend fun expire() {
-        if (_state.value == SessionState.SignedOut) return
+        if (_state.value == SessionState.SIGNED_OUT) return
         signOut()
         _expired.trySend(Unit)
     }

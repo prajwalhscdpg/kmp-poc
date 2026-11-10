@@ -4,9 +4,9 @@ import com.cdpg.dhruva.core.strings.StringKey
 import com.cdpg.dhruva.domain.location.AddressDetails
 
 enum class AddressType(val apiValue: String, val label: StringKey) {
-    Home("home", StringKey.AddressTypeHome),
-    Work("work", StringKey.AddressTypeWork),
-    Other("other", StringKey.AddressTypeOther),
+    Home("home", StringKey.ADDRESS_TYPE_HOME),
+    Work("work", StringKey.ADDRESS_TYPE_WORK),
+    Other("other", StringKey.ADDRESS_TYPE_OTHER),
     ;
 
     companion object {

@@ -46,13 +46,13 @@ class NetworkStackTest {
     @Test fun incorrectOtpIsAResultNotAnError() = runTest {
         val result = auth.verifyOtp("9900195577", "000000")
         assertEquals(DanAiaResult.Success(OtpVerification.Incorrect), result)
-        assertEquals(SessionState.SignedOut, session.state.value)
+        assertEquals(SessionState.SIGNED_OUT, session.state.value)
     }
 
     @Test fun verifiedOtpStartsTheSession() = runTest {
         val result = auth.verifyOtp("9876543210", MockDhruvaBackend.VALID_OTP)
         assertEquals(DanAiaResult.Success(OtpVerification.Verified(isNewUser = true)), result)
-        assertEquals(SessionState.Authenticated, session.state.value)
+        assertEquals(SessionState.AUTHENTICATED, session.state.value)
         assertNotNull(session.accessToken())
     }
 
@@ -62,7 +62,7 @@ class NetworkStackTest {
         // The mock accepts each access token 5 times; the 6th call has to refresh.
         repeat(8) { assertIs<DanAiaResult.Success<Unit>>(profile.updateFullName("Ravi Kumar")) }
         assertNotEquals(firstToken, session.accessToken())
-        assertEquals(SessionState.Authenticated, session.state.value)
+        assertEquals(SessionState.AUTHENTICATED, session.state.value)
     }
 
     @Test fun refusedRefreshEndsTheSession() = runTest {
@@ -72,7 +72,7 @@ class NetworkStackTest {
         repeat(5) { profile.updateFullName("Ravi Kumar") }
         val result = profile.updateFullName("Ravi Kumar")
         assertEquals(DanAiaResult.Error(DanAiaError.Unauthorized), result)
-        assertEquals(SessionState.SignedOut, session.state.value)
+        assertEquals(SessionState.SIGNED_OUT, session.state.value)
     }
 
     @Test fun noConnectionIsANetworkError() = runTest {

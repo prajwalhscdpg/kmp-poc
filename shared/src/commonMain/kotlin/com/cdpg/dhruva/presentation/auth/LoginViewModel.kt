@@ -84,7 +84,7 @@ class LoginViewModel(
 
 private fun MobileNumberError.toUiText(): UiText = UiText.Res(
     when (this) {
-        MobileNumberError.InvalidStart -> StringKey.LoginErrorInvalidStart
-        MobileNumberError.Incomplete -> StringKey.LoginErrorInvalidNumber
+        MobileNumberError.InvalidStart -> StringKey.LOGIN_ERROR_INVALID_START
+        MobileNumberError.Incomplete -> StringKey.LOGIN_ERROR_INVALID_NUMBER
     },
 )

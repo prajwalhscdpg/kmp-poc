@@ -52,7 +52,7 @@ class LoginViewModelTest {
 
     @Test fun wrongFirstDigitShowsTheErrorWhileTyping() {
         viewModel.onPhoneNumberChange("5")
-        assertEquals(UiText.Res(StringKey.LoginErrorInvalidStart), viewModel.state.value.error)
+        assertEquals(UiText.Res(StringKey.LOGIN_ERROR_INVALID_START), viewModel.state.value.error)
     }
 
     @Test fun incompleteNumberErrorAppearsOnContinueAndClearsOnEdit() {
@@ -61,7 +61,7 @@ class LoginViewModelTest {
         assertTrue(viewModel.state.value.isContinueEnabled)
 
         viewModel.onContinue()
-        assertEquals(UiText.Res(StringKey.LoginErrorInvalidNumber), viewModel.state.value.error)
+        assertEquals(UiText.Res(StringKey.LOGIN_ERROR_INVALID_NUMBER), viewModel.state.value.error)
         assertTrue(auth.sentTo.isEmpty())
 
         viewModel.onPhoneNumberChange("984501")
@@ -82,6 +82,6 @@ class LoginViewModelTest {
         auth.sendResult = DanAiaResult.Error(DanAiaError.Network)
         viewModel.onPhoneNumberChange("9845012345")
         viewModel.onContinue()
-        assertEquals(UiText.Res(StringKey.ErrorNetwork), viewModel.state.value.error)
+        assertEquals(UiText.Res(StringKey.ERROR_NETWORK), viewModel.state.value.error)
     }
 }

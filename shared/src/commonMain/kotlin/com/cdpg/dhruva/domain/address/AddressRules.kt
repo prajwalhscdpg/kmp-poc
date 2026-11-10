@@ -46,6 +46,6 @@ enum class FloorOption(val number: Int) {
     Ground(0), First(1), Second(2), Third(3), Fourth(4), Fifth(5), Sixth(6), Seventh(7), Eighth(8);
 
     val label: UiText
-        get() = if (this == Ground) UiText.Res(StringKey.CreateDaFloorGround)
-        else UiText.Res(StringKey.CreateDaFloorNumbered, listOf(number))
+        get() = if (this == Ground) UiText.Res(StringKey.CREATE_DA_FLOOR_GROUND)
+        else UiText.Res(StringKey.CREATE_DA_FLOOR_NUMBERED, listOf(number))
 }

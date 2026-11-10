@@ -65,15 +65,15 @@ data class CreateAddressUiState(
     /** "39J-438-TJC7", or "Outside DIGIPIN coverage area". */
     val digipinDisplay: UiText
         get() = digipin?.let { UiText.Raw(Digipin.formatForDisplay(it)) }
-            ?: UiText.Res(StringKey.CreateDaDigipinUnavailable)
+            ?: UiText.Res(StringKey.CREATE_DA_DIGIPIN_UNAVAILABLE)
 
     val canProceedFromMap: Boolean get() = digipin != null
 
     val previewNickname: UiText
-        get() = if (nickname.isBlank()) UiText.Res(StringKey.CreateDaPreviewNicknamePlaceholder) else UiText.Raw(nickname)
+        get() = if (nickname.isBlank()) UiText.Res(StringKey.CREATE_DA_PREVIEW_NICKNAME_PLACEHOLDER) else UiText.Raw(nickname)
 
     val previewHandle: UiText
-        get() = if (prefix.isEmpty()) UiText.Res(StringKey.CreateDaPreviewHandlePlaceholder) else UiText.Raw(prefix + suffix)
+        get() = if (prefix.isEmpty()) UiText.Res(StringKey.CREATE_DA_PREVIEW_HANDLE_PLACEHOLDER) else UiText.Raw(prefix + suffix)
 
     val suffixOptions: List<String> get() = AddressSuffixes.options
     val floorOptions: List<FloorOption> get() = FloorOption.entries
@@ -158,7 +158,7 @@ class CreateAddressViewModel(
     }
 
     fun onCurrentLocationFailed(permissionDenied: Boolean) {
-        val key = if (permissionDenied) StringKey.CreateDaLocationPermissionDenied else StringKey.CreateDaLocationUnavailable
+        val key = if (permissionDenied) StringKey.CREATE_DA_LOCATION_PERMISSION_DENIED else StringKey.CREATE_DA_LOCATION_UNAVAILABLE
         _state.update { it.copy(locationError = UiText.Res(key)) }
     }
 
@@ -191,8 +191,8 @@ class CreateAddressViewModel(
 
     fun onNicknameProceed() {
         val current = _state.value
-        val nicknameError = if (current.nickname.isBlank()) UiText.Res(StringKey.CreateDaNicknameRequired) else null
-        val prefixError = if (!validatePrefix(current.prefix)) UiText.Res(StringKey.CreateDaPrefixInvalid) else null
+        val nicknameError = if (current.nickname.isBlank()) UiText.Res(StringKey.CREATE_DA_NICKNAME_REQUIRED) else null
+        val prefixError = if (!validatePrefix(current.prefix)) UiText.Res(StringKey.CREATE_DA_PREFIX_INVALID) else null
         _state.update { it.copy(nicknameError = nicknameError, prefixError = prefixError) }
         if (nicknameError == null && prefixError == null) {
             scope.launch { _events.send(CreateAddressEvent.GoToConfirm) }
@@ -224,7 +224,7 @@ class CreateAddressViewModel(
                     _state.update { it.copy(isSubmitting = false) }
                     val message = when (result.data) {
                         is CreateAddressOutcome.Created -> null
-                        is CreateAddressOutcome.Queued -> UiText.Res(StringKey.CreateDaQueuedOffline)
+                        is CreateAddressOutcome.Queued -> UiText.Res(StringKey.CREATE_DA_QUEUED_OFFLINE)
                     }
                     _events.send(CreateAddressEvent.Finished(message))
                 }

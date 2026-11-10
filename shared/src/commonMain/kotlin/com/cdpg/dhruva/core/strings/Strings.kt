@@ -52,7 +52,7 @@ internal fun formatTemplate(template: String, args: List<Any>): String =
 
 /**
  * The app-wide string resolver, in the user's current language. Both UIs call it:
- * Compose with `localizer.text(StringKey.LoginTitle)`, SwiftUI with `L10n.text(.loginTitle)`.
+ * Compose with `localizer.text(StringKey.LOGIN_TITLE)`, SwiftUI with `L10n.text(.loginTitle)`.
  */
 class Localizer(val language: StateFlow<AppLanguage>) {
 
@@ -69,15 +69,15 @@ class Localizer(val language: StateFlow<AppLanguage>) {
 /** How each typed error reads on screen. One mapping, both platforms. */
 fun DanAiaError.toUiText(): UiText = UiText.Res(
     when (this) {
-        DanAiaError.Network -> StringKey.ErrorNetwork
-        DanAiaError.Timeout -> StringKey.ErrorTimeout
-        DanAiaError.Unauthorized -> StringKey.ErrorSessionExpired
-        is DanAiaError.Server -> StringKey.ErrorServer
+        DanAiaError.Network -> StringKey.ERROR_NETWORK
+        DanAiaError.Timeout -> StringKey.ERROR_TIMEOUT
+        DanAiaError.Unauthorized -> StringKey.ERROR_SESSION_EXPIRED
+        is DanAiaError.Server -> StringKey.ERROR_SERVER
         is DanAiaError.Validation -> when (type) {
-            ProblemType.INCORRECT_OTP -> StringKey.OtpErrorIncorrect
-            ProblemType.HANDLE_TAKEN -> StringKey.CreateDaHandleTaken
-            else -> StringKey.ErrorUnexpected
+            ProblemType.INCORRECT_OTP -> StringKey.OTP_ERROR_INCORRECT
+            ProblemType.HANDLE_TAKEN -> StringKey.CREATE_DA_HANDLE_TAKEN
+            else -> StringKey.ERROR_UNEXPECTED
         }
-        is DanAiaError.NotFound, DanAiaError.Unexpected -> StringKey.ErrorUnexpected
+        is DanAiaError.NotFound, DanAiaError.Unexpected -> StringKey.ERROR_UNEXPECTED
     },
 )
